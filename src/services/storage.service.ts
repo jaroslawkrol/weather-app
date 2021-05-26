@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Location } from '../model/interfaces/location';
 
 enum StorageKey {
   CUSTOM_LOCATION = 'customLocation',
@@ -17,12 +16,11 @@ export class StorageService {
   };
 
   static customLocation = {
-    getValue: async (): Promise<Location | null> => {
-      const response = await StorageService.getItem(StorageKey.CUSTOM_LOCATION);
-      return response ? <Location>JSON.parse(response) : null;
+    getValue: async (): Promise<string | null> => {
+      return StorageService.getItem(StorageKey.CUSTOM_LOCATION);
     },
-    setValue: async (location: Location) => {
-      return await StorageService.setItem(StorageKey.CUSTOM_LOCATION, JSON.stringify(location));
+    setValue: async (location: string) => {
+      return await StorageService.setItem(StorageKey.CUSTOM_LOCATION, location);
     },
     clear: async () => {
       return await StorageService.clearItem(StorageKey.CUSTOM_LOCATION);

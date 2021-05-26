@@ -52,10 +52,15 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-    <string>Location message tododo</string>
+    <string>Coords message tododo</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>Location message tododo</string>
+    <string>Coords message tododo</string>
     <key>NSLocationAlwaysUsageDescription</key>
-    <string>Location message tododo</string>
+    <string>Coords message tododo</string>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
 </dict>
 </plist>

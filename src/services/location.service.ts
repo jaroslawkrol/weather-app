@@ -1,9 +1,9 @@
-import { Location } from '../model/interfaces/location';
+import { Coords } from '../model/interfaces/coords';
 import Geolocation, { GeolocationResponse } from '@react-native-community/geolocation';
 import { StorageService } from './storage.service';
 
 export class LocationService {
-  public static getCurrentLocation = async (): Promise<Location | null> => {
+  public static getCurrentLocation = async (): Promise<Coords | null> => {
     try {
       const geolocationResponse = await LocationService.getCurrentPosition();
       return {
@@ -16,11 +16,11 @@ export class LocationService {
     }
   };
 
-  public static saveCustomLocation = async (location: Location) => {
+  public static saveCustomLocation = async (location: string) => {
     await StorageService.customLocation.setValue(location);
   };
 
-  public static getCustomLocation = async (): Promise<Location | null> => {
+  public static getCustomLocation = async (): Promise<string | null> => {
     return await StorageService.customLocation.getValue();
   };
 
