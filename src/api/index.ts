@@ -7,7 +7,6 @@ const api = axios.create({
 });
 
 const get = <T>(url: string, params: any) => {
-  console.log(OPEN_WEATHER_KEY);
   return api.get<T>(url, {
     params: { ...params, appid: OPEN_WEATHER_KEY },
   });
