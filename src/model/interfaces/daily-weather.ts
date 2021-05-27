@@ -1,9 +1,11 @@
+import { WeatherCode } from '../enums/weather-code.enum';
+
 export interface DailyWeather {
   id: string;
   date: string;
   dayOfWeek: string;
-  type?: string;
-  description?: string;
+  type: WeatherCode;
+  description: string;
   morningTemperature: number;
   dayTemperature: number;
   nightTemperature: number;

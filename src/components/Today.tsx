@@ -1,25 +1,37 @@
-import { Address } from '../model/interfaces/address';
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../utils/colors';
+import { DailyWeather } from '../model/interfaces/daily-weather';
+import WeatherIcon from './WeatherIcon';
+import Icon from 'react-native-vector-icons/Fontisto';
 
 interface Props {
-  address: Address;
-  date: string;
-  dayOfWeek: string;
+  dailyWeather: DailyWeather;
 }
 
-const Today: React.FC<Props> = ({ address, date, dayOfWeek }) => {
+const Today: React.FC<Props> = ({ dailyWeather }) => {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <Text style={styles.title}>
-          {address.city}, {address.country}
-        </Text>
-        <Text style={styles.subtitle}>
-          {dayOfWeek}, {date}
-        </Text>
+        <View style={styles.leftSide}>
+          <Text style={styles.mean}>{dailyWeather.mean}°</Text>
+          <View style={styles.minmaxContainer}>
+            <Text style={styles.minMax}>
+              <Icon style={styles.minMaxIcon} name={'caret-down'} />{' '}
+              {dailyWeather.minimum}°
+            </Text>
+            <Text style={styles.minMax}>
+              <Icon style={styles.minMaxIcon} name={'caret-up'} />{' '}
+              {dailyWeather.maximum}°
+            </Text>
+          </View>
+        </View>
+        <View style={styles.rightSide}>
+          <WeatherIcon code={dailyWeather.type} size={'big'} light />
+          <Text style={styles.description}>{dailyWeather.description}</Text>
+        </View>
       </View>
+      <Text style={styles.humidity}>Humidity: {dailyWeather.humidity}%</Text>
     </View>
   );
 };
@@ -31,8 +43,10 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   innerContainer: {
+    flexDirection: 'row',
     padding: 16,
     marginHorizontal: 16,
+    marginBottom: 12,
     borderRadius: 16,
     backgroundColor: Colors.primary,
 
@@ -46,14 +60,42 @@ const styles = StyleSheet.create({
 
     elevation: 8,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.primary,
-    marginBottom: 8,
+  leftSide: {
+    width: '50%',
   },
-  subtitle: {
+  rightSide: {
+    width: '50%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  mean: {
+    fontSize: 48,
+    color: Colors.secondary,
+    textAlign: 'center',
+  },
+  minmaxContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  minMax: {
+    fontSize: 14,
+    lineHeight: 21,
+    color: Colors.secondaryLighter,
+  },
+  minMaxIcon: {
+    marginRight: 8,
+  },
+  description: {
     fontSize: 16,
-    color: Colors.primaryLighter,
+    lineHeight: 18,
+    color: Colors.secondary,
+  },
+  humidity: {
+    fontSize: 14,
+    lineHeight: 21,
+    textAlign: 'center',
+    color: Colors.primary,
   },
 });

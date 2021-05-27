@@ -1,0 +1,17 @@
+export enum WeatherCode {
+  THUNDERSTORM = 'Thunderstorm',
+  DRIZZLE = 'Drizzle',
+  RAIN = 'Rain',
+  SNOW = 'Snow',
+  CLEAR = 'Clear',
+  CLOUDS = 'Clouds',
+  MIST = 'Mist',
+  SMOKE = 'Smoke',
+  HAZE = 'Haze',
+  DUST = 'Dust',
+  FOG = 'Fog',
+  SAND = 'Sand',
+  ASH = 'Ash',
+  SQUALL = 'Squall',
+  TORNADO = 'Tornado',
+}

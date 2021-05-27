@@ -62,5 +62,9 @@
         <key>NSAllowsArbitraryLoads</key>
         <true/>
     </dict>
+    <key>UIAppFonts</key>
+    <array>
+      <string>Fontisto.ttf</string>
+    </array>
 </dict>
 </plist>

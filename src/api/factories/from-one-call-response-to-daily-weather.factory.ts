@@ -1,6 +1,7 @@
 import { Daily, OneCallResponse, Temp } from '../responses/one-call.response';
 import { DailyWeather } from '../../model/interfaces/daily-weather';
 import moment from 'moment';
+import { WeatherCode } from '../../model/enums/weather-code.enum';
 
 export const fromOneCallResponseToWeatherInfo = (
   weatherResponse: OneCallResponse,
@@ -10,12 +11,16 @@ export const fromOneCallResponseToWeatherInfo = (
     const date = moment(daily.dt * 1000);
     const weather = daily.weather && daily.weather.length ? daily.weather[0] : undefined;
 
+    if (!weather) {
+      throw new Error('Incorrect response format');
+    }
+
     return {
       id: `daily-${index}`,
       date: date.format('Do MMM YYYY'), // TODO: format to constants
       dayOfWeek: date.format('dddd'), // TODO: format to constants
-      type: weather?.main,
-      description: weather?.description,
+      type: <WeatherCode>weather.main,
+      description: weather.description,
       morningTemperature: Math.round(daily.temp.morn),
       dayTemperature: Math.round(daily.temp.day),
       nightTemperature: Math.round(daily.temp.night),

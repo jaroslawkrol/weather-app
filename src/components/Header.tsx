@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Address } from '../model/interfaces/address';
-import { StyleSheet, Text, View } from 'react-native';
+import { Picker, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../utils/colors';
 
 interface Props {
@@ -12,12 +12,21 @@ interface Props {
 const Header: React.FC<Props> = ({ address, date, dayOfWeek }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        {address.city}, {address.country}
-      </Text>
-      <Text style={styles.subtitle}>
-        {dayOfWeek}, {date}
-      </Text>
+      <View style={styles.infoContainer}>
+        <Text style={styles.subtitle}>
+          {dayOfWeek}, {date}
+        </Text>
+        <Text style={styles.title}>
+          {address.city}, {address.country}
+        </Text>
+      </View>
+      <Picker
+        selectedValue={'java'}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
+        <Picker.Item label="Java" value="java" />
+        <Picker.Item label="JavaScript" value="js" />
+      </Picker>
     </View>
   );
 };
@@ -26,19 +35,23 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     paddingHorizontal: 16,
+    paddingVertical: 16,
     marginBottom: 16,
   },
+  infoContainer: {
+    flexDirection: 'column',
+  },
   title: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: '600',
     color: Colors.primary,
-    marginBottom: 8,
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 18,
     color: Colors.primaryLighter,
+    marginBottom: 8,
   },
 });

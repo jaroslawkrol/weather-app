@@ -7,12 +7,13 @@ import { Colors } from '../utils/colors';
 import { useEffect } from 'react';
 import Header from '../components/Header';
 import Today from '../components/Today';
+import Icon from 'react-native-vector-icons/Fontisto';
+import RestOfWeek from '../components/RestOfWeek';
 
 const WeatherScreen: React.FC = () => {
   const { location, weatherInfo } = useStore();
   const { address } = location;
   const { dailyWeathers } = weatherInfo;
-  const today = dailyWeathers && dailyWeathers.length ? dailyWeathers[0] : null;
 
   useEffect(() => {
     const hydrate = async () => {
@@ -31,27 +32,26 @@ const WeatherScreen: React.FC = () => {
     },
   );
 
+  const renderWeatherPresentation = () => {
+    if (!(dailyWeathers && dailyWeathers.length) || !address) {
+      return <></>;
+    }
+
+    const [today, ...restOfWeek] = dailyWeathers;
+    return (
+      <View style={styles.backgroundStyle}>
+        <Header address={address} date={today.date} dayOfWeek={today.dayOfWeek} />
+        <Today dailyWeather={today} />
+        <RestOfWeek today={today} restOfWeek={restOfWeek} />
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.backgroundStyle}>
       <StatusBar barStyle={'dark-content'} />
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.backgroundStyle}>
-        {today && address && (
-          <View style={styles.backgroundStyle}>
-            <Header address={address} date={today.date} dayOfWeek={today.dayOfWeek} />
-            <Today address={address} date={today.date} dayOfWeek={today.dayOfWeek} />
-            <Button title={'fetch location'} onPress={location.fetchLocation} />
-            {location.address && (
-              <Button
-                title={'fetch weather info'}
-                onPress={() => weatherInfo.fetchWeatherInfoByCoords(location.address?.coords)}
-              />
-            )}
-            {weatherInfo &&
-              weatherInfo.dailyWeathers.map((daily) => {
-                return <Text key={daily.id}>Weather: {daily.date}</Text>;
-              })}
-          </View>
-        )}
+        {renderWeatherPresentation()}
       </ScrollView>
     </SafeAreaView>
   );
