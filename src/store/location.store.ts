@@ -12,7 +12,7 @@ class LocationStore {
     makeAutoObservable(this);
   }
 
-  fetchLocation = async () => {
+  fetchLocation = async (): Promise<void> => {
     this.isBusy = true;
     try {
       let address: Address | null = null;
@@ -34,7 +34,7 @@ class LocationStore {
     }
   };
 
-  setCustomLocation = async (cityName: string) => {
+  setCustomLocation = async (cityName: string): Promise<void> => {
     const address: Address | null = await AddressService.fetchAddressByCityName(cityName);
     await LocationService.saveCustomLocation(cityName);
     runInAction(() => {
@@ -42,7 +42,7 @@ class LocationStore {
     });
   };
 
-  setCurrentLocation = async () => {
+  setCurrentLocation = async (): Promise<void> => {
     const coords = await LocationService.getCurrentLocation();
     const address: Address | null =
       await AddressService.fetchAddressByCurrentPositionOrReturnDefaultAddress(coords);

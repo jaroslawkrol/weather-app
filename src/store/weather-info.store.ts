@@ -12,7 +12,7 @@ class WeatherInfoStore {
     makeAutoObservable(this);
   }
 
-  fetchWeatherInfoByCoords = async (coords: Coords) => {
+  fetchWeatherInfoByCoords = async (coords: Coords): Promise<void> => {
     this.isBusy = true;
     this.error = false;
     try {

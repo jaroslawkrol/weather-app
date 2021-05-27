@@ -12,7 +12,7 @@ import React from 'react';
 import AppStoreProvider from './src/providers/AppStoreProvider';
 import WeatherScreen from './src/screens/WeatherScreen';
 
-const App = () => {
+const App = (): JSX.Element => {
   return (
     <AppStoreProvider>
       <WeatherScreen />

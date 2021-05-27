@@ -21,14 +21,14 @@ const WeatherScreen: React.FC = () => {
       await location.fetchLocation();
     };
 
-    hydrate();
+    void hydrate();
   }, []);
 
   reaction(
     () => location.address,
     (address, previousAddress) => {
       if (address && address?.city !== previousAddress?.city) {
-        weatherInfo.fetchWeatherInfoByCoords(address.coords);
+        void weatherInfo.fetchWeatherInfoByCoords(address.coords);
       }
     },
   );

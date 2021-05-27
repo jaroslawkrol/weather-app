@@ -15,7 +15,7 @@ export class LocationService {
     }
   };
 
-  public static saveCustomLocation = async (location: string) => {
+  public static saveCustomLocation = async (location: string): Promise<void> => {
     await StorageService.customLocation.setValue(location);
   };
 
@@ -23,7 +23,7 @@ export class LocationService {
     return await StorageService.customLocation.getValue();
   };
 
-  public static clearCustomLocation = async () => {
+  public static clearCustomLocation = async (): Promise<void> => {
     await StorageService.customLocation.clear();
   };
 

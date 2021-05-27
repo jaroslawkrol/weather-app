@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { IAppStore } from '../model/store/app-store';
 import { AppStoreContext } from '../providers/AppStoreProvider';
 
-const useStore = () => {
+const useStore = (): IAppStore => {
   const store: IAppStore = useContext(AppStoreContext);
 
   if (!store) {

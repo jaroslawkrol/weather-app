@@ -5,13 +5,13 @@ enum StorageKey {
 }
 
 export class StorageService {
-  private static getItem = async (key: string) => {
+  private static getItem = async (key: string): Promise<string | null> => {
     return await AsyncStorage.getItem(key);
   };
-  private static setItem = async (key: string, value: string) => {
+  private static setItem = async (key: string, value: string): Promise<void> => {
     return await AsyncStorage.setItem(key, value);
   };
-  private static clearItem = async (key: string) => {
+  private static clearItem = async (key: string): Promise<void> => {
     return await AsyncStorage.removeItem(key);
   };
 
@@ -19,10 +19,10 @@ export class StorageService {
     getValue: async (): Promise<string | null> => {
       return StorageService.getItem(StorageKey.CUSTOM_LOCATION);
     },
-    setValue: async (location: string) => {
+    setValue: async (location: string): Promise<void> => {
       return await StorageService.setItem(StorageKey.CUSTOM_LOCATION, location);
     },
-    clear: async () => {
+    clear: async (): Promise<void> => {
       return await StorageService.clearItem(StorageKey.CUSTOM_LOCATION);
     },
   };

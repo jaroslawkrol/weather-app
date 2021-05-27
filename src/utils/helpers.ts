@@ -1,6 +1,6 @@
 import { WeatherCode } from '../model/enums/weather-code.enum';
 
-export const extractFontistoIconNameByWeatherCode = (code: WeatherCode) => {
+export const extractFontistoIconNameByWeatherCode = (code: WeatherCode): string => {
   switch (code) {
     case WeatherCode.THUNDERSTORM:
       return 'lightning';

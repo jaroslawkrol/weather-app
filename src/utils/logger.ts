@@ -5,11 +5,11 @@ export class Logger {
     this.feature = feature;
   }
 
-  public debug = (msg: string) => {
+  public debug = (msg: string): void => {
     console.debug(`[${this.feature}] [${new Date().toLocaleTimeString()}] ${msg}`);
   };
 
-  public warn = (msg: string) => {
+  public warn = (msg: string): void => {
     console.warn(`[${this.feature}] [${new Date().toLocaleTimeString()}] ${msg}`);
   };
 }
