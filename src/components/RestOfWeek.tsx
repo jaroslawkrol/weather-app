@@ -2,7 +2,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import * as React from 'react';
 import { DailyWeather } from '../model/interfaces/daily-weather';
 import Icon from 'react-native-vector-icons/Fontisto';
-import { Colors } from '../utils/colors';
 
 interface Props {
   today: DailyWeather;
@@ -27,7 +26,7 @@ const RestOfWeek: React.FC<Props> = ({ today, restOfWeek }) => {
         </View>
       </View>
       {restOfWeek.map((daily) => (
-        <View style={styles.row}>
+        <View key={daily.id} style={styles.row}>
           <Text style={styles.rowTitle}>{daily.dayOfWeek.slice(0, 3)}</Text>
           <View style={styles.rowContent}>
             <Text style={styles.contentColumn}>

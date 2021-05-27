@@ -16,7 +16,10 @@ class WeatherInfoStore {
     this.isBusy = true;
     this.error = false;
     try {
-      this.dailyWeathers = await WeatherService.fetchWeatherByCoords(coords);
+      const dailyWeathers = await WeatherService.fetchWeatherByCoords(coords);
+      runInAction(() => {
+        this.dailyWeathers = dailyWeathers;
+      });
     } catch (e) {
       this.dailyWeathers = [];
       this.error = true;

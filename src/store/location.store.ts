@@ -23,13 +23,33 @@ class LocationStore {
         const coords = await LocationService.getCurrentLocation();
         address = await AddressService.fetchAddressByCurrentPositionOrReturnDefaultAddress(coords);
       }
-      this.address = address;
+      runInAction(() => {
+        this.address = address;
+      });
     } catch (e) {
       this.address = null;
       this.error = true;
     } finally {
       this.isBusy = false;
     }
+  };
+
+  setCustomLocation = async (cityName: string) => {
+    const address: Address | null = await AddressService.fetchAddressByCityName(cityName);
+    await LocationService.saveCustomLocation(cityName);
+    runInAction(() => {
+      this.address = address;
+    });
+  };
+
+  setCurrentLocation = async () => {
+    const coords = await LocationService.getCurrentLocation();
+    const address: Address | null =
+      await AddressService.fetchAddressByCurrentPositionOrReturnDefaultAddress(coords);
+    await LocationService.clearCustomLocation();
+    runInAction(() => {
+      this.address = address;
+    });
   };
 }
 

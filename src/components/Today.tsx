@@ -17,17 +17,15 @@ const Today: React.FC<Props> = ({ dailyWeather }) => {
           <Text style={styles.mean}>{dailyWeather.mean}°</Text>
           <View style={styles.minmaxContainer}>
             <Text style={styles.minMax}>
-              <Icon style={styles.minMaxIcon} name={'caret-down'} />{' '}
-              {dailyWeather.minimum}°
+              <Icon style={styles.minMaxIcon} name={'caret-down'} /> {dailyWeather.minimum}°
             </Text>
             <Text style={styles.minMax}>
-              <Icon style={styles.minMaxIcon} name={'caret-up'} />{' '}
-              {dailyWeather.maximum}°
+              <Icon style={styles.minMaxIcon} name={'caret-up'} /> {dailyWeather.maximum}°
             </Text>
           </View>
         </View>
         <View style={styles.rightSide}>
-          <WeatherIcon code={dailyWeather.type} size={'big'} light />
+          <WeatherIcon style={styles.mainIcon} code={dailyWeather.type} />
           <Text style={styles.description}>{dailyWeather.description}</Text>
         </View>
       </View>
@@ -97,5 +95,8 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     textAlign: 'center',
     color: Colors.primary,
+  },
+  mainIcon: {
+    marginBottom: 8,
   },
 });

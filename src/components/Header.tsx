@@ -1,15 +1,17 @@
 import * as React from 'react';
 import { Address } from '../model/interfaces/address';
-import { Picker, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../utils/colors';
+import Icon from 'react-native-vector-icons/Fontisto';
 
 interface Props {
   address: Address;
   date: string;
   dayOfWeek: string;
+  onLocationSelect: () => void;
 }
 
-const Header: React.FC<Props> = ({ address, date, dayOfWeek }) => {
+const Header: React.FC<Props> = ({ address, date, dayOfWeek, onLocationSelect }) => {
   return (
     <View style={styles.container}>
       <View style={styles.infoContainer}>
@@ -20,13 +22,9 @@ const Header: React.FC<Props> = ({ address, date, dayOfWeek }) => {
           {address.city}, {address.country}
         </Text>
       </View>
-      <Picker
-        selectedValue={'java'}
-        style={{ height: 50, width: 150 }}
-        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
-        <Picker.Item label="Java" value="java" />
-        <Picker.Item label="JavaScript" value="js" />
-      </Picker>
+      <TouchableOpacity onPress={onLocationSelect}>
+        <Icon name={'holiday-village'} size={48} />
+      </TouchableOpacity>
     </View>
   );
 };
