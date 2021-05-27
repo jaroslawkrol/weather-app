@@ -1,5 +1,10 @@
 # WeatherApp
 
+<div style="display: flex; flex-direction: row;">
+<img width="300" alt="1-presentation" src="https://user-images.githubusercontent.com/10097549/119831581-b6559f00-befd-11eb-8d44-e1ffb04a0e99.png">
+<img width="300" alt="2-presentation" src="https://user-images.githubusercontent.com/10097549/119831599-bbb2e980-befd-11eb-9a33-1c6fa1a277fb.png">
+</div>
+
 ## Introduction
 
 The application communicates with the OpenWeather API. It displays data about the current weather in your location or in a place in the world selected by the user.
