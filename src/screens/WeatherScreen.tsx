@@ -64,7 +64,7 @@ const WeatherScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
-      <StatusBar barStyle={'dark-content'} />
+      <StatusBar backgroundColor={Colors.secondary} barStyle={'dark-content'} />
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.backgroundStyle}>
         {renderWeatherPresentation()}
       </ScrollView>
