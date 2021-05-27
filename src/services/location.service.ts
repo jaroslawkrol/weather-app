@@ -11,7 +11,6 @@ export class LocationService {
         lon: geolocationResponse.coords.longitude,
       };
     } catch (e) {
-      // TODO: add logger
       return null;
     }
   };

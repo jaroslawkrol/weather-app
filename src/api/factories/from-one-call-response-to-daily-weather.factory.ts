@@ -2,35 +2,37 @@ import { Daily, OneCallResponse, Temp } from '../responses/one-call.response';
 import { DailyWeather } from '../../model/interfaces/daily-weather';
 import moment from 'moment';
 import { WeatherCode } from '../../model/enums/weather-code.enum';
+import { Constants } from '../../utils/constants';
 
 export const fromOneCallResponseToWeatherInfo = (
   weatherResponse: OneCallResponse,
 ): DailyWeather[] => {
-  // TODO: slice 5
-  return weatherResponse.daily.slice(0, 5).map((daily: Daily, index: number) => {
-    const date = moment(daily.dt * 1000);
-    const weather = daily.weather && daily.weather.length ? daily.weather[0] : undefined;
+  return weatherResponse.daily
+    .slice(0, Constants.OPEN_WEATHER.ONE_CALL_MAX_RESULTS)
+    .map((daily: Daily, index: number) => {
+      const date = moment(daily.dt * 1000);
+      const weather = daily.weather && daily.weather.length ? daily.weather[0] : undefined;
 
-    if (!weather) {
-      throw new Error('Incorrect response format');
-    }
+      if (!weather) {
+        throw new Error('Incorrect response format');
+      }
 
-    return {
-      id: `daily-${index}`,
-      date: date.format('Do MMM YYYY'), // TODO: format to constants
-      dayOfWeek: date.format('dddd'), // TODO: format to constants
-      type: <WeatherCode>weather.main,
-      description: weather.description,
-      morningTemperature: Math.round(daily.temp.morn),
-      dayTemperature: Math.round(daily.temp.day),
-      nightTemperature: Math.round(daily.temp.night),
-      humidity: Math.round(daily.humidity),
-      minimum: Math.round(daily.temp.min),
-      maximum: Math.round(daily.temp.max),
-      mean: extractMeanValue(daily.temp),
-      median: extractMedianValue(daily.temp),
-    };
-  });
+      return {
+        id: `daily-${index}`,
+        date: date.format(Constants.DATE_FORMAT),
+        dayOfWeek: date.format(Constants.DAY_OF_WEEK_FORMAT),
+        type: <WeatherCode>weather.main,
+        description: weather.description,
+        morningTemperature: Math.round(daily.temp.morn),
+        dayTemperature: Math.round(daily.temp.day),
+        nightTemperature: Math.round(daily.temp.night),
+        humidity: Math.round(daily.humidity),
+        minimum: Math.round(daily.temp.min),
+        maximum: Math.round(daily.temp.max),
+        mean: extractMeanValue(daily.temp),
+        median: extractMedianValue(daily.temp),
+      };
+    });
 };
 
 const extractMeanValue = (temp: Temp) => {

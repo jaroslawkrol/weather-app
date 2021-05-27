@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { Constants } from '../utils/constants';
 
 const api = axios.create({
-  baseURL: 'https://api.openweathermap.org/data/2.5', // TODO: extract to constant
+  baseURL: Constants.API.BASE_URL,
 });
 
 const get = <T>(url: string, params: any) => {
